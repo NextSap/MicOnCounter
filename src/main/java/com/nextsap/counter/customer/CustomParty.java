@@ -48,6 +48,14 @@ public class CustomParty {
         this.kills = kills;
     }
 
+    public int getKills(String name) {
+        int amountKill = 0;
+        if (kills.get(name) != null) {
+            amountKill = kills.get(name);
+        }
+        return amountKill;
+    }
+
     public void addOneKill(String name) {
         int amountKill = 0;
         if (this.kills.get(name) != null) {

@@ -3,6 +3,10 @@ package com.nextsap.counter.graphics;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Fallancy <3
+ */
+
 public class FrameManager {
 
     private JFrame frame;

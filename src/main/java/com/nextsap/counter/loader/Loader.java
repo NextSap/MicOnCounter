@@ -1,5 +1,6 @@
 package com.nextsap.counter.loader;
 
+import com.nextsap.counter.Settings;
 import com.nextsap.counter.customer.CustomParty;
 import com.nextsap.counter.utils.DateUtils;
 
@@ -12,9 +13,11 @@ import java.util.Scanner;
 
 public class Loader {
 
-    public static List<String> load() {
+    public static boolean partyFinished;
+
+    private static List<String> load() {
         try {
-            File file = new File("C:\\Users\\NextSap\\AppData\\Roaming\\.az-client\\logs\\latest.log");
+            File file = new File(Settings.getLogPath());
             Scanner scanner = new Scanner(file);
             List<String> content = new ArrayList<>();
             while (scanner.hasNextLine()) {
@@ -29,15 +32,19 @@ public class Loader {
         return null;
     }
 
-    public static void parser(long start, long end) {
+    public static CustomParty parser(long start, long end) {
         List<String> parsed = new ArrayList<>();
         for (String s : load()) {
             long date = DateUtils.getTime(s.split("\\[")[1].split("]")[0]);
-            if (DateUtils.isBetween(date, start, end) && (s.contains("⚔") || s.contains(" [SkyWars] "))) {
+            if (DateUtils.isBetween(date, start, end) && (s.contains("⚔") || s.contains("[SkyWars] "))) {
                 parsed.add(s);
-                System.out.println(". . . > " + s);
             }
         }
+
+        parsed.forEach(log -> {
+            partyFinished = log.contains("[SkyWars] ") && log.contains(" a gagné !");
+        });
+
 
         CustomParty customParty = new CustomParty();
         customParty.setStart(start);
@@ -46,6 +53,7 @@ public class Loader {
         for (String line : parsed) {
             if (line.contains("[SkyWars] ") && line.contains(" a gagné !"))
                 customParty.addPodium(line.split("\\[SkyWars] ")[1].split(" ")[0]);
+
 
             List<String> killers = new ArrayList<>();
 
@@ -64,7 +72,6 @@ public class Loader {
                                 killers.add(table[i]);
                             }
                         }
-
                     } else {
                         killers.addAll(Arrays.asList(current.split(" et ")));
                     }
@@ -72,13 +79,18 @@ public class Loader {
                     killers.add(current);
                 }
             }
+            if (line.contains(" est mort."))
+                customParty.addPodium(line.split("⚔ ")[1].split(" est mort.")[0]);
+
             for (String killer : killers)
                 customParty.addOneKill(killer);
         }
+
         List<String> newPodium = new ArrayList<>();
         for (int i = customParty.getPodium().size() - 1; i >= 0; i--)
             newPodium.add(customParty.getPodium().get(i));
 
         customParty.setPodium(newPodium);
+        return customParty;
     }
 }

@@ -32,7 +32,7 @@ public class Initializer {
         File file = new File(Settings.getIconPath());
         if (!file.exists()) {
             try {
-                URL url = new URL("https://www.mic-on.fr/img/banner_bg%20logo.png");
+                URL url = new URL("https://mic-on.fr/img/TournoiExplo/Tournoi_explo_logo.png");
                 URLConnection urlConnection = url.openConnection();
                 urlConnection.setRequestProperty("User-Agent", "NING/1.0");
                 InputStream bufferedReader = new BufferedInputStream(urlConnection.getInputStream());
