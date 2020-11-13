@@ -1,21 +1,21 @@
 package com.nextsap.counter.graphics.frames;
 
-import com.nextsap.counter.Settings;
 import com.nextsap.counter.graphics.FrameManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.net.InetAddress;
 
 public class DefaultFrame extends FrameManager {
 
+    ImageIcon icon = new ImageIcon("C:\\Users\\NextSap\\AppData\\Roaming\\MicOnCounter\\icon.png");
     private JLabel infoLabel;
     private JButton startButton;
     private JButton endButton;
+    private long start;
+    private long end;
 
-    public DefaultFrame() throws IOException {
+    public DefaultFrame() {
         this.setTitle("Mic!ON - Game Admin");
         this.setWidth(460);
         this.setHeight(300);
@@ -24,7 +24,7 @@ public class DefaultFrame extends FrameManager {
 
         this.getPanel().setLayout(new GridBagLayout());
         this.getPanel().setBackground(new Color(152, 152, 152));
-        this.setFavicon(Settings.getIconPath(InetAddress.getLocalHost().getHostName()));
+        this.setFavicon(icon.getImage());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridheight = 1;
         constraints.gridwidth = 1;
@@ -68,6 +68,7 @@ public class DefaultFrame extends FrameManager {
         this.endButton.setBorderPainted(false);
         this.endButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
         this.endButton.setBackground(new Color(255, 70, 70));
+        this.endButton.setEnabled(false);
         this.endButton.addActionListener(this::gameEndClickEvent);
         buttonsPanel.add(this.endButton);
 
@@ -90,10 +91,14 @@ public class DefaultFrame extends FrameManager {
     }
 
     public void gameStartClickEvent(ActionEvent event) {
-
+        this.start = System.currentTimeMillis();
+        this.startButton.setEnabled(false);
     }
 
     public void gameEndClickEvent(ActionEvent actionEvent) {
+        this.end = System.currentTimeMillis();
+        this.endButton.setEnabled(true);
+
 
     }
 
