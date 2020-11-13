@@ -6,10 +6,13 @@ import com.nextsap.counter.graphics.FrameManager;
 import com.nextsap.counter.graphics.frames.result.ResultFrame;
 import com.nextsap.counter.loader.Loader;
 import com.nextsap.counter.utils.LbBlink;
+import javafx.scene.input.MouseEvent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.net.URI;
 
 public class DefaultFrame extends FrameManager {
 
@@ -83,9 +86,9 @@ public class DefaultFrame extends FrameManager {
         JPanel aboutPanel = new JPanel();
         aboutPanel.setPreferredSize(new Dimension(130, 50));
 
-        JLabel micLabel = new JLabel("For Mic!ON by NextSap");
-        micLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-        aboutPanel.add(micLabel);
+        JLabel aboutLabel = new JLabel("For Mic!ON by NextSap");
+        aboutLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        aboutPanel.add(aboutLabel);
 
         constraints.gridx = 0;
         constraints.gridy = 3;
