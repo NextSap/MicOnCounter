@@ -6,13 +6,10 @@ import com.nextsap.counter.graphics.FrameManager;
 import com.nextsap.counter.graphics.frames.result.ResultFrame;
 import com.nextsap.counter.loader.Loader;
 import com.nextsap.counter.utils.LbBlink;
-import javafx.scene.input.MouseEvent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.net.URI;
 
 public class DefaultFrame extends FrameManager {
 
@@ -107,8 +104,7 @@ public class DefaultFrame extends FrameManager {
     }
 
     public void gameEndClickEvent(ActionEvent actionEvent) {
-        long end = System.currentTimeMillis();
-        CustomParty customParty = Loader.parser(this.start, end);
+        CustomParty customParty = Loader.parser(this.start, System.currentTimeMillis());
         if (Loader.partyFinished) {
             gameEnd(customParty);
         } else {

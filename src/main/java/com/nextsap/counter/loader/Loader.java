@@ -35,25 +35,24 @@ public class Loader {
     public static CustomParty parser(long start, long end) {
         List<String> parsed = new ArrayList<>();
         for (String s : load()) {
+            System.out.println(s);
             long date = DateUtils.getTime(s.split("\\[")[1].split("]")[0]);
-            if (DateUtils.isBetween(date, start, end) && (s.contains("⚔") || s.contains("[SkyWars] "))) {
+            if (DateUtils.isBetween(date, start, end) && (s.contains("⚔") || s.contains("[SkyWars] ")) && (!s.contains(" [CHAT] [Groupe] ") && !s.contains("->")))
                 parsed.add(s);
-            }
         }
 
         parsed.forEach(log -> {
             partyFinished = log.contains("[SkyWars] ") && log.contains(" a gagné !");
         });
 
-
         CustomParty customParty = new CustomParty();
         customParty.setStart(start);
         customParty.setEnd(end);
 
         for (String line : parsed) {
-            if (line.contains("[SkyWars] ") && line.contains(" a gagné !"))
+            if (line.contains("[SkyWars] ") && line.contains(" a gagné !")) {
                 customParty.addPodium(line.split("\\[SkyWars] ")[1].split(" ")[0]);
-
+            }
 
             List<String> killers = new ArrayList<>();
 
