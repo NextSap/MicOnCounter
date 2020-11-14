@@ -1,11 +1,11 @@
-# MicOnCounter
+# Mic!ON Counter
 *Do what you want, exactly how you want it.*
 
 
 # Description
 <img width="25%" align="right" alt="MicOn" src="https://www.mic-on.fr/img/banner_bg%20logo"/>
 
-MicOnCounter is a Java Desktop Application made for <a href="https://www.mic-on.fr/">Mic!ON</a>. With that, you can parse your logs to have the party recapitulation. It also made to help tournament referees to count players's kills and determine the current party's leaderboard.
+Mic!ON Counter is a Java Desktop Application made for <a href="https://www.mic-on.fr/">Mic!ON</a>. With that, you can parse your logs to have the party recapitulation. It also made to help tournament referees to count players's kills and determine the current party's leaderboard.
 
 # Conception
 The main part of the application was developed in 10h on **Friday, 13** November 2020.
