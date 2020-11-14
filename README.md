@@ -12,9 +12,9 @@ The main part of the application developed in 10h on **Friday, 13** November 202
 
 # How to use
 ### 🇬🇧 English :
-When you start the program, you can see on <a href="https://prnt.sc/viw9mp" target="_blank">this frame</a> two mainly buttons. When the game starts, the tournament referee must click on the green button. This button simply indicates that the party starts. A label blink to tell you that the game is correctly started.
-A bit later, when the party is over, the tournament referee must click on the red button who will indicate that the game finishes.
-After clicking on the red button, a second frame will open in front of you. This frame will show you a table who regroup some datas such as the leaderboard and the amount of players kill.
+When you start the program, you can see on <a href="https://prnt.sc/viw9mp" target="_blank">this frame</a> two buttons. When the game starts, the user must click on the green button. This button simply indicates that the game starts. A label blinks to tell you that the game has correctly started.
+A bit later, when the party is over, the user must click on the red button who will indicate that the game has been ended.
+After clicking on the red button, a second frame will pop-up. This frame will show you a table who regroup some datas such as the leaderboard and the amount of players kill.
 To validate the game, the referee must take a screenshot <a href="https://prnt.sc/viwg3w" target="_blank">like that</a>.
 
 ### 🇫🇷 French :
