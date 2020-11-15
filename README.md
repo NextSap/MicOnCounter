@@ -24,4 +24,29 @@ Après avoir cliqué sur le bouton rouge, une seconde page s'ouvrira. Cette page
 Pour valider la partie, l'arbitre doit prendre une capture d'écran <a href="https://prnt.sc/viwg3w" target="_blank">comme ceci</a>.
 
 # How to report an issue
-TODO
+### 🇬🇧 English :
+First of all people who do not have access at this repository will not be able to open an issue.
+
+⚠️ **Please, make your issues in English !** ⚠️
+
+To open an issue follow this operating mode : 
+ - Go on <a href="https://github.com/NextSap/MicOnCounter/issues">this link</a> or click on "Issues" at the top of the page.
+ - Click on the green button "New issue".
+ - Choose a explicit title.
+ - Detail the issue as much as possible. You can include screenshots or anything you think is usefull. The more will be the better.
+ - Choose a label. To do that look at the right of the page and at the right of "Labels" click on the gear. You can choose several labels as long as necessary. Please if it is possible choose a label who already exists.
+ - When you did previous steps, you can click on the green button "Submit new issue".
+
+### 🇫🇷 French :
+D'abord, les personnes qui n'ont pas accès à ce dépôt ne pourront pas ouvrir d'issue.
+
+⚠️ **S'il-vous plaît, faites vos issues en anglais !** ⚠️
+
+Pour ouvrir une issue, suivez ce mode opératoire :
+ - Aller sur <a href="https://github.com/NextSap/MicOnCounter/issues">ce lien</a> ou cliquez sur "Issues" en haut de la page.
+ - Cliquez sur le bouton vert "New issue".
+ - Choisissez un titre explicite.
+ - Détaillez l'issue autant que possible. Vous pouvez inclure des captures d'écran ou n'importe quoi tant que vous jugez ça utile. Le plus sera le mieux.
+ - Choisissez un label. Pour faire cela, regardez à la droite de l'écran et sur la droite de "Labels" cliquez sur l'engrenage. Vous pouvez choisir plusieurs label tant que c'est nécessaire. S'il-vous plait, si c'est possible, choisissez un label qui existe déjà.
+ - Quand vous avez terminé les étapes précédentes, vous pouvez cliquer sur le bouton vert "Submit new issue".
+ - When you did previous steps, you can click on the green button "Submit new issue".
