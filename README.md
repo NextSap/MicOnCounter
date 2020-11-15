@@ -49,4 +49,3 @@ Pour ouvrir une issue, suivez ce mode opératoire :
  - Détaillez l'issue autant que possible. Vous pouvez inclure des captures d'écran ou n'importe quoi tant que vous jugez ça utile. Le plus sera le mieux.
  - Choisissez un label. Pour faire cela, regardez à la droite de l'écran et sur la droite de "Labels" cliquez sur l'engrenage. Vous pouvez choisir plusieurs label tant que c'est nécessaire. S'il-vous plait, si c'est possible, choisissez un label qui existe déjà.
  - Quand vous avez terminé les étapes précédentes, vous pouvez cliquer sur le bouton vert "Submit new issue".
- - When you did previous steps, you can click on the green button "Submit new issue".
