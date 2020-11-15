@@ -4,11 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author Fallancy <3
+ * Class to manage JFrame classes
+ *
+ * @author Fallancy <3 I love him
  */
 
 public class FrameManager {
 
+    // Define attributes
     private JFrame frame;
     private JPanel panel;
 
@@ -19,6 +22,9 @@ public class FrameManager {
     private boolean resizable;
     private boolean main;
 
+    /**
+     * {@link FrameManager} Constructor
+     */
     public FrameManager() {
         this.frame = new JFrame();
         this.panel = new JPanel();
@@ -30,6 +36,9 @@ public class FrameManager {
         this.main = false;
     }
 
+    /**
+     * Initialize the frame
+     */
     public void initialize() {
         if (this.title != null) this.frame.setTitle(this.title);
         if (this.favicon != null) this.frame.setIconImage(this.favicon);
@@ -39,6 +48,9 @@ public class FrameManager {
         this.frame.setContentPane(this.panel);
     }
 
+    /**
+     * Show the frame
+     */
     public void show() {
         this.frame.setLocationRelativeTo(null);
         if (this.main) this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -49,26 +61,58 @@ public class FrameManager {
         this.frame.setVisible(true);
     }
 
+    /**
+     * Hide the frame
+     */
     public void hide() {
         this.frame.setVisible(false);
     }
 
+    /**
+     * Show an error dialog on the current frame
+     *
+     * @param message is the error message
+     */
     public void showErrorDialog(String message) {
         showErrorDialog("Une erreur est survenue !", message);
     }
 
+    /**
+     * Show an error dialog on the current frame
+     *
+     * @param title   is the error's title
+     * @param message is the error message
+     */
     public void showErrorDialog(String title, String message) {
         JOptionPane.showMessageDialog(this.getFrame(), message, title, JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Show an information dialog on the current frame
+     *
+     * @param title   is the information's title
+     * @param message is the information message
+     */
     public void showInformationDialog(String title, String message) {
         JOptionPane.showMessageDialog(this.getFrame(), message, title, JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Show a question dialog on the current frame
+     *
+     * @param title   is the question's title
+     * @param message is the question message
+     */
     public int showQuestionDialog(String title, String message) {
         return JOptionPane.showConfirmDialog(this.getFrame(), message, title, JOptionPane.YES_NO_OPTION);
     }
 
+    /**
+     * Show an input dialog on the current frame
+     *
+     * @param title   is the input's title
+     * @param message is the input message
+     */
     public String showInputDialog(String title, String message) {
         return JOptionPane.showInputDialog(this.getFrame(), message, title, JOptionPane.PLAIN_MESSAGE);
     }

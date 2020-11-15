@@ -1,6 +1,7 @@
 package com.nextsap.counter.setup;
 
 import com.nextsap.counter.Settings;
+import com.nextsap.counter.logger.FileType;
 import com.nextsap.counter.logger.Log;
 import com.nextsap.counter.logger.LogType;
 
@@ -10,24 +11,60 @@ import java.net.URLConnection;
 
 public class Initializer {
 
+    /**
+     * {@link Initializer} Constructor
+     */
     public Initializer() {
         createFolder();
+        createLogsFiles();
         dlIcon();
+        Log.create(LogType.SUCCESS, FileType.CURRENT, "Programme lancé.");
     }
 
-    public static void createFolder() {
+    /**
+     * Create program's folder
+     */
+    private void createFolder() {
         String name = System.getProperty("user.name");
         File file = new File("C:\\Users\\" + name + "\\AppData\\Roaming\\MicOnCounter\\");
 
         if (!file.exists()) {
             file.mkdir();
-            Log.create(LogType.SUCCESS, "Le répertoire a bien été créé.");
+            System.out.println("Le répertoire a bien été créé.");
             return;
         }
 
-        Log.create(LogType.INFORMATION, "Le répertoire existe déjà.");
+        System.out.println("Le répertoire existe déjà.");
     }
 
+    /**
+     * Create program's logs files
+     */
+    private void createLogsFiles() {
+        try {
+            String name = System.getProperty("user.name");
+            File currentLogs = new File("C:\\Users\\" + name + "\\AppData\\Roaming\\MicOnCounter\\CurrentLogs.txt");
+            File matchLogs = new File("C:\\Users\\" + name + "\\AppData\\Roaming\\MicOnCounter\\MatchLogs.txt");
+
+            if (!currentLogs.exists()) {
+                currentLogs.createNewFile();
+                System.out.println("Le fichier 'CurrentLogs.txt' a bien été créé.");
+            } else
+                System.out.println("Le fichier 'CurrentLogs.txt' existe déjà.");
+            if (!matchLogs.exists()) {
+                matchLogs.createNewFile();
+                System.out.println("Le fichier 'MatchLogs.txt' a bien été créé.");
+            } else
+                System.out.println("Le fichier 'MatchLogs.txt' existe déjà.");
+        } catch (Exception e) {
+            System.out.println("Une erreur est survenue : ");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Download an icon from the web
+     */
     private void dlIcon() {
         File file = new File(Settings.getIconPath());
         if (!file.exists()) {
@@ -48,13 +85,13 @@ public class Initializer {
                 FileOutputStream fos = new FileOutputStream(Settings.getIconPath());
                 fos.write(response);
                 fos.close();
-                Log.create(LogType.SUCCESS, "Image téléchargée");
+                Log.create(LogType.SUCCESS, FileType.CURRENT, "Image téléchargée.");
             } catch (Exception e) {
-                Log.create(LogType.ERROR, "Une erreur est survenue :");
+                Log.create(LogType.ERROR, FileType.CURRENT, "Une erreur est survenue :");
                 e.printStackTrace();
             }
         }
 
-        Log.create(LogType.INFORMATION, "L'image existe déjà.");
+        Log.create(LogType.INFORMATION, FileType.CURRENT, "L'image existe déjà.");
     }
 }

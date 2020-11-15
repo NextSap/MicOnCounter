@@ -5,13 +5,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A implemented {@link ActionListener} class
+ */
 public class LbBlink implements ActionListener {
+
+    // Define attributes
     private final JLabel label;
     private final Color cor1 = new Color(54, 166, 76);
     private final Color cor2 = Color.RED;
     private int count;
 
-    public LbBlink(javax.swing.JLabel label) {
+    /**
+     * {@link LbBlink} Constructor
+     *
+     * @param label is the {@link JLabel}
+     */
+    public LbBlink(JLabel label) {
         this.label = label;
     }
 

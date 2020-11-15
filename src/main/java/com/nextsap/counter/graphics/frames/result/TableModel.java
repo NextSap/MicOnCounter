@@ -1,21 +1,30 @@
 package com.nextsap.counter.graphics.frames.result;
 
-import com.nextsap.counter.customer.CustomParty;
+import com.nextsap.counter.customer.CustomGame;
 
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * An extended {@link AbstractTableModel} class
+ */
 public class TableModel extends AbstractTableModel {
 
-    private final CustomParty customParty;
+    // Define attributes
+    private final CustomGame customGame;
     private final String[] columnName = {"Pseudo", "Kills", "Place"};
 
-    public TableModel(CustomParty customParty) {
-        this.customParty = customParty;
+    /**
+     * {@link TableModel} Constructor
+     *
+     * @param customGame is the current game
+     */
+    public TableModel(CustomGame customGame) {
+        this.customGame = customGame;
     }
 
     @Override
     public int getRowCount() {
-        return customParty.getPodium().size();
+        return customGame.getPodium().size();
     }
 
     @Override
@@ -32,10 +41,10 @@ public class TableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return customParty.getPodium().get(rowIndex);
+                return customGame.getPodium().get(rowIndex);
             case 1:
-                String name = customParty.getPodium().get(rowIndex);
-                return customParty.getKills().get(name);
+                String name = customGame.getPodium().get(rowIndex);
+                return customGame.getKills().get(name);
             case 2:
                 return rowIndex + 1;
             default:

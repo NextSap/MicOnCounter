@@ -2,22 +2,33 @@ package com.nextsap.counter.customer;
 
 import java.util.*;
 
-public class CustomParty {
+/**
+ * It is a Custom Skywars Game
+ */
+public class CustomGame {
 
-    private List<String> podium; // Name and place
-    private Map<String, Integer> kills; // Name and amount of kill
-
+    // Define attributes
+    private List<String> podium;
+    private Map<String, Integer> kills;
     private long start;
     private long end;
 
-    public CustomParty(List<String> podium, Map<String, Integer> kills, long start, long end) {
+    /**
+     * {@link CustomGame} Constructor
+     *
+     * @param podium is a {@link List} who contains the player's name
+     * @param kills  is a {@link Map} who contains the player's name and his amount of kill
+     * @param start  is the current time when the game starts
+     * @param end    is the current time when the game ends
+     */
+    public CustomGame(List<String> podium, Map<String, Integer> kills, long start, long end) {
         this.podium = podium;
         this.kills = kills;
         this.start = start;
         this.end = end;
     }
 
-    public CustomParty() {
+    public CustomGame() {
         this.podium = new ArrayList<>();
         this.kills = new HashMap<>();
         this.start = 0;

@@ -1,25 +1,35 @@
 package com.nextsap.counter.graphics.frames;
 
+import com.google.gson.Gson;
 import com.nextsap.counter.Settings;
-import com.nextsap.counter.customer.CustomParty;
+import com.nextsap.counter.customer.CustomGame;
 import com.nextsap.counter.graphics.FrameManager;
 import com.nextsap.counter.graphics.frames.result.ResultFrame;
 import com.nextsap.counter.loader.Loader;
+import com.nextsap.counter.logger.FileType;
+import com.nextsap.counter.logger.Log;
+import com.nextsap.counter.logger.LogType;
 import com.nextsap.counter.utils.LbBlink;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * An extended {@link FrameManager} class
+ */
 public class DefaultFrame extends FrameManager {
 
-
+    // Define attributes
     private final JButton startButton;
     private final JLabel blinkLabel;
     private final JButton endButton;
     private long start;
     private Timer timer;
 
+    /**
+     * {@link DefaultFrame} Constructor
+     */
     public DefaultFrame() {
         this.setTitle("Mic!ON - Game Admin");
         this.setWidth(550);
@@ -92,8 +102,12 @@ public class DefaultFrame extends FrameManager {
         this.getPanel().add(aboutPanel, constraints);
     }
 
+    /**
+     * When click on the start button
+     *
+     * @param event is the click event
+     */
     public void gameStartClickEvent(ActionEvent event) {
-
         this.start = System.currentTimeMillis();
         this.startButton.setEnabled(false);
         this.blinkLabel.setText("Monitoring en cours...");
@@ -101,10 +115,18 @@ public class DefaultFrame extends FrameManager {
         this.timer = new Timer(500, new LbBlink(blinkLabel));
         this.timer.start();
         this.endButton.setEnabled(true);
+
+        Log.create(LogType.INFORMATION, FileType.CURRENT, "Game started");
+        Log.create(LogType.INFORMATION, FileType.MATCH, "Game started");
     }
 
-    public void gameEndClickEvent(ActionEvent actionEvent) {
-        CustomParty customParty = Loader.parser(this.start, System.currentTimeMillis());
+    /**
+     * When click on the end button
+     *
+     * @param event is the click event
+     */
+    public void gameEndClickEvent(ActionEvent event) {
+        CustomGame customParty = Loader.parser(this.start, System.currentTimeMillis());
         if (Loader.partyFinished) {
             gameEnd(customParty);
         } else {
@@ -114,12 +136,21 @@ public class DefaultFrame extends FrameManager {
         }
     }
 
-    private void gameEnd(CustomParty customParty) {
+    /**
+     * Procedure when the game is ended
+     *
+     * @param customGame is the current game
+     */
+    private void gameEnd(CustomGame customGame) {
         this.startButton.setEnabled(true);
         this.endButton.setEnabled(false);
         this.blinkLabel.setText("");
         this.timer.stop();
 
-        new ResultFrame(customParty).show();
+        Log.create(LogType.INFORMATION, FileType.CURRENT, "Game ended");
+        Log.create(LogType.INFORMATION, FileType.MATCH, "Game ended");
+
+        new ResultFrame(customGame).show();
+        Log.create(LogType.INFORMATION, FileType.MATCH, new Gson().toJson(customGame));
     }
 }

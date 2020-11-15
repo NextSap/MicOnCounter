@@ -1,15 +1,23 @@
 package com.nextsap.counter.graphics.frames.result;
 
-import com.nextsap.counter.customer.CustomParty;
+import com.nextsap.counter.customer.CustomGame;
 import com.nextsap.counter.graphics.FrameManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
+/**
+ * An extended {@link FrameManager} class
+ */
 public class ResultFrame extends FrameManager {
 
-    public ResultFrame(CustomParty customParty) {
+    /**
+     * {@link ResultFrame} Constructor
+     *
+     * @param customGame is the current game
+     */
+    public ResultFrame(CustomGame customGame) {
         this.setTitle("Mic!ON - Game Admin - Résultats");
         this.setWidth(460);
         this.setHeight(259);
@@ -25,7 +33,7 @@ public class ResultFrame extends FrameManager {
         JPanel tablePanel = new JPanel();
         tablePanel.setPreferredSize(new Dimension(450, 230));
 
-        JTable resultTable = new JTable(new TableModel(customParty));
+        JTable resultTable = new JTable(new TableModel(customGame));
         resultTable.setPreferredSize(new Dimension(450, 230));
         resultTable.setAutoCreateRowSorter(true);
         resultTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -37,6 +45,11 @@ public class ResultFrame extends FrameManager {
         this.getPanel().add(tablePanel);
     }
 
+    /**
+     * Align {@link JTable} columns
+     *
+     * @param jTable is the current {@link JTable}
+     */
     public void alignment(JTable jTable) {
         DefaultTableCellRenderer second = new DefaultTableCellRenderer();
         second.setHorizontalAlignment(JLabel.LEFT);
@@ -48,6 +61,11 @@ public class ResultFrame extends FrameManager {
 
     }
 
+    /**
+     * Resize {@link JTable} columns
+     *
+     * @param jTable is the current {@link JTable}
+     */
     public void resize(JTable jTable) {
         jTable.getColumnModel().getColumn(0).setPreferredWidth(125);
         jTable.getColumnModel().getColumn(1).setPreferredWidth(50);

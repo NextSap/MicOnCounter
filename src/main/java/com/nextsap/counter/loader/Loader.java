@@ -1,7 +1,10 @@
 package com.nextsap.counter.loader;
 
 import com.nextsap.counter.Settings;
-import com.nextsap.counter.customer.CustomParty;
+import com.nextsap.counter.customer.CustomGame;
+import com.nextsap.counter.logger.FileType;
+import com.nextsap.counter.logger.Log;
+import com.nextsap.counter.logger.LogType;
 import com.nextsap.counter.utils.DateUtils;
 
 import java.io.File;
@@ -11,10 +14,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The loader
+ */
 public class Loader {
 
+    // Define attribute
     public static boolean partyFinished;
 
+    /**
+     * Load the log file
+     *
+     * @return a {@link List} who contains file's lines
+     */
     private static List<String> load() {
         try {
             File file = new File(Settings.getLogPath());
@@ -26,16 +38,24 @@ public class Loader {
             scanner.close();
             return content;
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            Log.create(LogType.ERROR, FileType.CURRENT, "Une erreur est survenue :");
             e.printStackTrace();
         }
         return null;
     }
 
-    public static CustomParty parser(long start, long end) {
+    /**
+     * Parse the log to create a {@link CustomGame}
+     *
+     * @param start is the time when the game starts
+     * @param end   is the time when the game ends
+     * @return a new {@link CustomGame}
+     */
+    public static CustomGame parser(long start, long end) {
         List<String> parsed = new ArrayList<>();
         for (String s : load()) {
-            System.out.println(s);
+            if (!s.startsWith("["))
+                continue;
             long date = DateUtils.getTime(s.split("\\[")[1].split("]")[0]);
             if (DateUtils.isBetween(date, start, end) && (s.contains("⚔") || s.contains("[SkyWars] ")) && (!s.contains(" [CHAT] [Groupe] ") && !s.contains("->")))
                 parsed.add(s);
@@ -45,7 +65,7 @@ public class Loader {
             partyFinished = log.contains("[SkyWars] ") && log.contains(" a gagné !");
         });
 
-        CustomParty customParty = new CustomParty();
+        CustomGame customParty = new CustomGame();
         customParty.setStart(start);
         customParty.setEnd(end);
 
