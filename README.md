@@ -22,3 +22,6 @@ Quand vous lancez le programme, vous pouvez voir sur <a href="https://prnt.sc/vi
 Un peu plus tard, quand la partie sera terminée, l'arbitre doit cliqué sur le bouton rouge qui indiquera que la partie se termine.
 Après avoir cliqué sur le bouton rouge, une seconde page s'ouvrira. Cette page vous montrera un tableau qui regroupe des données comme le classement et le nombre de kills.
 Pour valider la partie, l'arbitre doit prendre une capture d'écran <a href="https://prnt.sc/viwg3w" target="_blank">comme ceci</a>.
+
+# How to report an issue
+TODO
