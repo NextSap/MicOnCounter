@@ -19,8 +19,8 @@ public class ResultFrame extends FrameManager {
      */
     public ResultFrame(CustomGame customGame) {
         this.setTitle("Mic!ON - Game Admin - Résultats");
-        this.setWidth(460);
-        this.setHeight(259);
+        this.setWidth(480);
+        this.setHeight(275);
         this.initialize();
 
         this.getPanel().setLayout(new GridBagLayout());
@@ -31,18 +31,20 @@ public class ResultFrame extends FrameManager {
 
         // Table
         JPanel tablePanel = new JPanel();
-        tablePanel.setPreferredSize(new Dimension(450, 230));
+        tablePanel.setPreferredSize(new Dimension(460, 220));
 
         JTable resultTable = new JTable(new TableModel(customGame));
-        resultTable.setPreferredSize(new Dimension(450, 230));
+        resultTable.setPreferredSize(new Dimension(460, 220));
         resultTable.setAutoCreateRowSorter(true);
         resultTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        resultTable.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+        resultTable.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         alignment(resultTable);
         resize(resultTable);
         tablePanel.add(new JScrollPane(resultTable));
 
-        this.getPanel().add(tablePanel);
+        constraints.gridheight = 0;
+        constraints.gridwidth = 0;
+        this.getPanel().add(tablePanel, constraints);
     }
 
     /**
@@ -67,11 +69,11 @@ public class ResultFrame extends FrameManager {
      * @param jTable is the current {@link JTable}
      */
     public void resize(JTable jTable) {
-        jTable.getColumnModel().getColumn(0).setPreferredWidth(125);
-        jTable.getColumnModel().getColumn(1).setPreferredWidth(50);
-        jTable.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+        jTable.getColumnModel().getColumn(1).setPreferredWidth(30);
+        jTable.getColumnModel().getColumn(2).setPreferredWidth(30);
         jTable.getTableHeader().setResizingAllowed(false);
         jTable.getTableHeader().setReorderingAllowed(false);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
-
 }

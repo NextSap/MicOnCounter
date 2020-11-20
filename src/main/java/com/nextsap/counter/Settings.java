@@ -5,6 +5,9 @@ package com.nextsap.counter;
  */
 public class Settings {
 
+    private final static String version = "v1";
+    private final static String about = "For Mic!ON by NextSap";
+
     /**
      * @return Icon path
      */
@@ -19,5 +22,13 @@ public class Settings {
     public static String getLogPath() {
         String path = "C:\\Users\\${name}\\AppData\\Roaming\\.az-client\\logs\\latest.log";
         return path.replace("${name}", System.getProperty("user.name"));
+    }
+
+    public static String getVersion() {
+        return version;
+    }
+
+    public static String getAbout() {
+        return about;
     }
 }

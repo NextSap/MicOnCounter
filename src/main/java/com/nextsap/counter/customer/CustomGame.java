@@ -98,4 +98,9 @@ public class CustomGame {
     public void setEnd(long end) {
         this.end = end;
     }
+
+    public void setTime(long start, long end) {
+        this.start = start;
+        this.end = end;
+    }
 }

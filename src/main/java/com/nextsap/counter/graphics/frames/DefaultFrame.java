@@ -45,7 +45,7 @@ public class DefaultFrame extends FrameManager {
         // Title
         JPanel titlePanel = new JPanel();
         titlePanel.setPreferredSize(new Dimension(320, 190));
-        titlePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "v1.0"));
+        titlePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), Settings.getVersion()));
 
         ImageIcon logo = new ImageIcon(Settings.getIconPath());
         JLabel titleLabel = new JLabel(logo);
@@ -93,7 +93,7 @@ public class DefaultFrame extends FrameManager {
         JPanel aboutPanel = new JPanel();
         aboutPanel.setPreferredSize(new Dimension(130, 50));
 
-        JLabel aboutLabel = new JLabel("For Mic!ON by NextSap");
+        JLabel aboutLabel = new JLabel(Settings.getAbout());
         aboutLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
         aboutPanel.add(aboutLabel);
 

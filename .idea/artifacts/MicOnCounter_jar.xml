@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MicOnCounter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MicOnCounter_jar</output-path>
+    <root id="archive" name="MicOnCounter.jar">
+      <element id="module-output" name="MicOnCounter" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/1.7.1/gson-1.7.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

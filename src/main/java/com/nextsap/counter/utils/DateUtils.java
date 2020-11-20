@@ -70,4 +70,13 @@ public class DateUtils {
         return value >= start && value <= end;
     }
 
+    /**
+     * Return if the line starts with a date like in a logfile
+     *
+     * @param line is the line to check
+     * @return a boolean
+     */
+    public static boolean isLogDate(String line) {
+        return line.charAt(0) == '[' && line.charAt(9) == ']' && line.charAt(3) == ':' && line.charAt(6) == ':' && (line.contains("⚔") || line.contains("[SkyWars] ")) && (!line.contains(" [CHAT] [Groupe] ") && !line.contains("->"));
+    }
 }
