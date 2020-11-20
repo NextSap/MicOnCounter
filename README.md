@@ -61,3 +61,9 @@ Pour ouvrir une issue, suivez ce mode opératoire :
    <b>   I. Une popup qui demande si vous voulez vraiment arrêter la partie apparaît.</b><br> 
    <b>   II. Le tableau final est vide.</b><br>
    <b>   III. Incluez les logs de la console dans l'issue.</b><br>
+   
+# Special tanks
+### 🖥️ Beta testers
+ - Speccy_
+ - Voolks_
+ - Mamak_
