@@ -13,7 +13,8 @@ public class Settings {
      */
     public static String getIconPath() {
         String iconPath = "C:\\Users\\${name}\\AppData\\Roaming\\MicOnCounter\\icon.png";
-        return iconPath.replace("${name}", System.getProperty("user.name"));
+        String name = System.getProperty("user.home").split("\\\\")[2];
+        return iconPath.replace("${name}", name);
     }
 
     /**
@@ -21,7 +22,8 @@ public class Settings {
      */
     public static String getLogPath() {
         String path = "C:\\Users\\${name}\\AppData\\Roaming\\.az-client\\logs\\latest.log";
-        return path.replace("${name}", System.getProperty("user.name"));
+        String name = System.getProperty("user.home").split("\\\\")[2];
+        return path.replace("${name}", name);
     }
 
     public static String getVersion() {

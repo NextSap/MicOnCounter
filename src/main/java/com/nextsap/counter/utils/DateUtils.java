@@ -77,6 +77,10 @@ public class DateUtils {
      * @return a boolean
      */
     public static boolean isLogDate(String line) {
-        return line.charAt(0) == '[' && line.charAt(9) == ']' && line.charAt(3) == ':' && line.charAt(6) == ':' && (line.contains("⚔") || line.contains("[SkyWars] ")) && (!line.contains(" [CHAT] [Groupe] ") && !line.contains("->"));
+        try {
+            return line.charAt(0) == '[' && line.charAt(9) == ']' && line.charAt(3) == ':' && line.charAt(6) == ':' && (line.contains("⚔") || line.contains("[SkyWars] ")) && (!line.contains(" [CHAT] [Groupe] ") && !line.contains("->"));
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

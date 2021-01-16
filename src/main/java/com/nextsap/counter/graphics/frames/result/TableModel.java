@@ -1,8 +1,10 @@
 package com.nextsap.counter.graphics.frames.result;
 
 import com.nextsap.counter.customer.CustomGame;
+import com.nextsap.counter.customer.PodiumEntry;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.Map;
 
 /**
  * An extended {@link AbstractTableModel} class
@@ -39,14 +41,14 @@ public class TableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        Map<String, PodiumEntry> podium = customGame.getPodium();
         switch (columnIndex) {
             case 0:
-                return customGame.getPodium().get(rowIndex);
+                return podium.keySet().toArray()[rowIndex];
             case 1:
-                String name = customGame.getPodium().get(rowIndex);
-                return customGame.getKills().get(name);
+                return customGame.getPodium().get(podium.keySet().toArray()[rowIndex]).getKills();
             case 2:
-                return rowIndex + 1;
+                return customGame.getPodium().get(podium.keySet().toArray()[rowIndex]).getPodium();
             default:
                 throw new IllegalArgumentException();
         }

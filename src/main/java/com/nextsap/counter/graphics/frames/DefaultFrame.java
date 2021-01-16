@@ -24,6 +24,8 @@ public class DefaultFrame extends FrameManager {
     private final JButton startButton;
     private final JLabel blinkLabel;
     private final JButton endButton;
+    private final JButton optionButton;
+    private CustomGame customGame = null;
     private long start;
     private Timer timer;
 
@@ -32,8 +34,8 @@ public class DefaultFrame extends FrameManager {
      */
     public DefaultFrame() {
         this.setTitle("Mic!ON - Game Admin");
-        this.setWidth(550);
-        this.setHeight(420);
+        this.setWidth(540);
+        this.setHeight(500);
         this.initialize();
         this.setMain(true);
 
@@ -65,7 +67,14 @@ public class DefaultFrame extends FrameManager {
 
         // Buttons
         JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setPreferredSize(new Dimension(170, 100));
+        buttonsPanel.setPreferredSize(new Dimension(220, 130));
+
+        this.optionButton = new JButton("Configuration");
+        this.optionButton.setBorderPainted(false);
+        this.optionButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+        this.optionButton.setBackground(new Color(255, 196, 0));
+        this.optionButton.addActionListener(this::optionClickEvent);
+        buttonsPanel.add(this.optionButton);
 
         this.startButton = new JButton("Lancement de la partie");
         this.startButton.setBorderPainted(false);
@@ -91,7 +100,7 @@ public class DefaultFrame extends FrameManager {
 
         // About
         JPanel aboutPanel = new JPanel();
-        aboutPanel.setPreferredSize(new Dimension(130, 50));
+        aboutPanel.setPreferredSize(new Dimension(130, 20));
 
         JLabel aboutLabel = new JLabel(Settings.getAbout());
         aboutLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
@@ -108,6 +117,10 @@ public class DefaultFrame extends FrameManager {
      * @param event is the click event
      */
     public void gameStartClickEvent(ActionEvent event) {
+        if (customGame == null) {
+            showErrorDialog("Erreur", "Vous devez d'abord configurer la partie.");
+            return;
+        }
         this.start = System.currentTimeMillis();
         this.startButton.setEnabled(false);
         this.blinkLabel.setText("Monitoring en cours...");
@@ -126,14 +139,25 @@ public class DefaultFrame extends FrameManager {
      * @param event is the click event
      */
     public void gameEndClickEvent(ActionEvent event) {
-        CustomGame customParty = Loader.parser(this.start, System.currentTimeMillis());
-        if (Loader.partyFinished) {
-            gameEnd(customParty);
-        } else {
-            int rep = this.showQuestionDialog("Attention !", "Voulez-vous vraiment terminer la partie ? Le programme pense que la partie n'est pas terminée.");
-            if (rep == 0)
-                gameEnd(customParty);
+        try {
+            Thread.sleep(3000);
+
+            CustomGame customGame = Loader.parser(this.customGame, this.start, System.currentTimeMillis());
+            if (Loader.partyFinished) {
+                gameEnd(customGame);
+            } else {
+                int rep = this.showQuestionDialog("Attention !", "Voulez-vous vraiment terminer la partie ? Le programme pense que la partie n'est pas terminée.");
+                if (rep == 0)
+                    gameEnd(customGame);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    public void optionClickEvent(ActionEvent event) {
+        this.customGame = new CustomGame();
+        new ConfigFrame(this.customGame).show();
     }
 
     /**
@@ -152,5 +176,6 @@ public class DefaultFrame extends FrameManager {
 
         new ResultFrame(customGame).show();
         Log.create(LogType.INFORMATION, FileType.MATCH, new Gson().toJson(customGame));
+        this.customGame = new CustomGame();
     }
 }

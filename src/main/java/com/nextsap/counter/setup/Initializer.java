@@ -25,8 +25,8 @@ public class Initializer {
      * Create program's folder
      */
     private void createFolder() {
-        String name = System.getProperty("user.name");
-        File file = new File("C:\\Users\\" + name + "\\AppData\\Roaming\\MicOnCounter\\");
+        String name = System.getProperty("user.home").split("\\\\")[2];
+        File file = new File("C:\\Users\\" + name + "\\AppData\\Roaming\\MicOnCounter\\"); // TODO: CUSTOMER
 
         if (!file.exists()) {
             file.mkdir();
@@ -42,9 +42,9 @@ public class Initializer {
      */
     private void createLogsFiles() {
         try {
-            String name = System.getProperty("user.name");
-            File currentLogs = new File("C:\\Users\\" + name + "\\AppData\\Roaming\\MicOnCounter\\CurrentLogs.txt");
-            File matchLogs = new File("C:\\Users\\" + name + "\\AppData\\Roaming\\MicOnCounter\\MatchLogs.txt");
+            String name = System.getProperty("user.home").split("\\\\")[2];
+            File currentLogs = new File("C:\\Users\\" + name + "\\AppData\\Roaming\\MicOnCounter\\CurrentLogs.txt"); // TODO: CUSTOMER
+            File matchLogs = new File("C:\\Users\\" + name + "\\AppData\\Roaming\\MicOnCounter\\MatchLogs.txt");  // TODO: CUSTOMER
 
             if (!currentLogs.exists()) {
                 currentLogs.createNewFile();

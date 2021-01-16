@@ -1,55 +1,91 @@
 package com.nextsap.counter.utils;
 
 import com.nextsap.counter.customer.CustomGame;
+import com.nextsap.counter.customer.PodiumEntry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class SplitUtils {
 
-    public static void addPodium(String line, CustomGame customGame) {
-        if (line.contains(" a été tué par "))
-            customGame.addPodium(line.split("⚔ ")[1].split(" a été tué par ")[0]);
-        if (line.contains(" est mort."))
-            customGame.addPodium(line.split("⚔ ")[1].split(" est mort.")[0]);
+    private final CustomGame customGame;
+    private final List<String> players;
+    private final List<String> currentPlayers;
+
+    public SplitUtils(CustomGame customGame) {
+        this.customGame = customGame;
+        this.players = customGame.getPlayers();
+        this.currentPlayers = new ArrayList<>();
     }
 
-    public static void addWinner(String line, CustomGame customGame) {
-        if (line.contains("[SkyWars] ") && line.contains(" a gagné !"))
-            customGame.addPodium(line.split("\\[SkyWars] ")[1].split(" ")[0]);
-    }
-
-    public static String getCurrentKillers(String line) {
-        return line.split(" a été tué par ")[1].substring(0, line.split(" a été tué par ")[1].length() - 1);
-    }
-
-    public static void addKiller(String line, CustomGame customGame) {
-        List<String> killers = new ArrayList<>();
+    public void addPodium(String line) {
         if (line.contains(" a été tué par ")) {
-            String current = SplitUtils.getCurrentKillers(line);
+            String player = line.split("⚔ ")[1].split(" a été tué par ")[0].toLowerCase();
+            if (players.contains(player) && !currentPlayers.contains(player)) {
+                customGame.addPodium(player, new PodiumEntry(players.size() - currentPlayers.size()));
+                currentPlayers.add(player);
+            }
+        }
+        if (line.contains(" est mort.")) {
+            String player = line.split("⚔ ")[1].split(" est mort.")[0].toLowerCase();
+            if (players.contains(player) && !currentPlayers.contains(player)) {
+                customGame.addPodium(player, new PodiumEntry(players.size() - currentPlayers.size()));
+                currentPlayers.add(player);
+            }
+        }
+    }
+
+    public void addWinner(String line) {
+        if (line.contains("[SkyWars] ") && line.contains(" a gagné !") && currentPlayers.size() == players.size()) {
+            String player = line.split("\\[SkyWars] ")[1].split(" ")[0].toLowerCase();
+            if (players.contains(player) && !currentPlayers.contains(player)) {
+                customGame.addPodium(player, new PodiumEntry(1));
+                currentPlayers.add(player);
+            }
+        }
+        if (line.contains("[SkyWars] ") && line.contains(" a gagné !") && currentPlayers.size() != players.size()) {
+            String player = line.split("\\[SkyWars] ")[1].split(" ")[0].toLowerCase();
+            if (players.contains(player) && !currentPlayers.contains(player)) {
+                customGame.addPodium(player, new PodiumEntry(1));
+                currentPlayers.add(player);
+            }
+            for (String currentPlayer : players) {
+                if (!currentPlayers.contains(currentPlayer)) {
+                    customGame.addPodium(currentPlayer, new PodiumEntry(2));
+                    currentPlayers.add(player);
+                }
+            }
+        }
+    }
+
+    public void addKiller(String line) {
+        if (line.contains(" a été tué par ")) {
+            String player = line.split("⚔ ")[1].split(" a été tué par ")[0].toLowerCase();
+            String current = line.split(" a été tué par ")[1].substring(0, line.split(" a été tué par ")[1].length() - 1).toLowerCase();
+
+            if (current.contains(player))
+                current = current.replace(player, "");
+
 
             if (current.contains(" et ")) {
-
                 if (current.contains(", ")) {
                     String[] killersTable = current.split(", ");
 
                     for (int i = 0; i < killersTable.length; i++) {
                         if (i == killersTable.length - 1) {
-                            killers.addAll(Arrays.asList(killersTable[i].split(" et ")));
+                            customGame.addKiller(killersTable[i].split(" et "));
                             return;
                         }
-                        killers.add(killersTable[i]);
+                        customGame.addKiller(killersTable[i]);
                     }
                     return;
                 }
-                killers.addAll(Arrays.asList(current.split(" et ")));
+                customGame.addKiller(current.split(" et "));
                 return;
             }
-            killers.add(current);
-
-            for (String killer : killers)
-                customGame.addOneKill(killer);
+            customGame.addKiller(current);
         }
     }
 }

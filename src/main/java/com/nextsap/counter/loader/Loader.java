@@ -5,7 +5,6 @@ import com.nextsap.counter.customer.CustomGame;
 import com.nextsap.counter.logger.FileType;
 import com.nextsap.counter.logger.Log;
 import com.nextsap.counter.logger.LogType;
-import com.nextsap.counter.utils.ArraysUtils;
 import com.nextsap.counter.utils.DateUtils;
 import com.nextsap.counter.utils.SplitUtils;
 
@@ -55,10 +54,8 @@ public class Loader {
      * @param end   is the time when the game ends
      * @return a new {@link CustomGame}
      */
-    public static CustomGame parser(long start, long end) {
+    public static CustomGame parser(CustomGame customGame, long start, long end) {
         List<String> content = load(start, end);
-
-        CustomGame customGame = new CustomGame();
 
         if (content == null) {
             Log.create(LogType.ERROR, FileType.CURRENT, "Logs are null");
@@ -70,13 +67,21 @@ public class Loader {
 
         customGame.setTime(start, end);
 
+        customGame.setLogs(content);
+
+        SplitUtils splitUtils = new SplitUtils(customGame);
+
         for (String line : content) {
-            SplitUtils.addWinner(line, customGame);
-            SplitUtils.addPodium(line, customGame);
-            SplitUtils.addKiller(line, customGame);
+            splitUtils.addWinner(line);
+            splitUtils.addPodium(line);
         }
 
-        customGame.setPodium(ArraysUtils.reverse(customGame.getPodium()));
+        for (String line : content)
+            splitUtils.addKiller(line);
+
+        for (String killer : customGame.getKillers())
+            customGame.addKill(killer);
+
         return customGame;
     }
 }

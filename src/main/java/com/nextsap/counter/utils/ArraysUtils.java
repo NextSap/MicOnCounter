@@ -12,4 +12,11 @@ public class ArraysUtils {
         return output;
     }
 
+    public static String salepute(String _char, int n) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < n; i++)
+            builder.append(_char);
+
+        return builder.toString();
+    }
 }
